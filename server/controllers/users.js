@@ -2,6 +2,7 @@ const models = require('../models');
 
 module.exports = {
   getAll: (req, res) => {
+    // 500 응답은 서버 오류 시 자동으로 전달된다.
     models.users.getAll((err, result) => {
       if( err ) res.status(404).send('Not found!');
       else res.status(200).json(result);
