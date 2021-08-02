@@ -1,16 +1,24 @@
-# hmarket-database 구현하기 (cmarket-database 스프린트 클론 코딩)
-- 클라이언트와 서버 그리고 데이터베이스까지 3tier 아키텍처를 구현한다.  
-- 프로젝트는 Node.js 기반으로 클라이언트와 서버를 구현한다.  
-- 데이터베이스는 관계형 데이터베이스인 MySQL을 이용한다.
-- 클라이언트는 React.js로 구현한다.
-- 서버는 Node.js 프레임워크인 MySQL을 이용한다.
-- MySQL 서버에 구현한다.
+# Hmarket Database 구현하기 - 스프린트 클론 코딩
 
-## 구현 URL
-- 전체 유저 조회  
-  `/users`
-- 해당 유저의 전체 주문 내역 조회  
-  `/users/:userId/orders`
+## 여기에서 구현하는 것
+- 클라이언트와 서버 그리고 데이터베이스까지 3tier 아키텍처를 구현한다.  
+- 프로젝트는 Node.js 기반으로 클라이언트와 서버, 그리고 관계형 데이터베이스 스키마를 구현한다.  
+- 클라이언트는 React.js를 사용한다.
+- 서버는 Node.js 프레임워크인 Express를 사용한다.
+- 데이터베이스는 RDBMS인 MySQL을 시용한다.
+
+## 여기에서 구현하지 않는 것
+- ORM Sequelize
+- HTTPS
+- 인증/보안/쿠키/해시/세션
+
+## 서버측 구현 URI
+1. `/users`
+  - 전체 회원 정보 조회 `/`
+  - 특정 ID 회원 정보 조회 `/:userId`
+  - 특정 ID 회원 전체 주문 내역 조회 `/:userId/orders`
+2. `/items`
+  - 전체 아이템 조회 `/`
 
 ## Step 1. hmarket 데이터베이스 생성하기
 1. 로컬 MySQL에 hmarket 데이터베이스를 생성한다.  
@@ -44,10 +52,10 @@
     `npm install nodemon`
 3. .env 파일 생성 및 환경 변수 설정
   - server > .env 파일 생성
-  - .env 에 환경 변수 설정
-    - DATABASE_USERNAME='아이디'
-    - DATABASE_PASSWORD='비밀번호'
-    - DATABASE_NAME='데이터베이스명'
+  - .env 에 환경 변수 설정  
+    `DATABASE_USERNAME='아이디'`  
+    `DATABASE_PASSWORD='비밀번호'`  
+    `DATABASE_NAME='데이터베이스명'`
 4. server > app.js 파일 생성 및 웹 서버 구축 (초기화)
   - app.js 파일을 생성한다.
   - express, cors 모듈만 불러와서 기본적인 서버를 구축한다.
@@ -62,10 +70,14 @@
   - db > index.js 생성  
     Node.js 와 MySQL 연동  
     `mysql.createConnection()`로 생성한 변수를 이용해서 데이터베이스에 쿼리를 날릴 수 있다.
-8. 라우팅: 메소드와 URL에 따라 분기(Routing)한다.
-  - routes 폴더 > users.js, items.js 생성  
-    `controllers > index.js 호출`
-  - controllers 폴더 > orders.js, items.js 생성  
-    `models > 해당 model 호출`
-  - models 폴더 > orders.js, items.js 생성
-    `db > index.js 호출`
+8. 라우팅 : 메소드와 URL에 따라 분기(Routing)한다. (빈 모듈 생성 및 내보내기 한 후 분기에 맞게 연결해준다.)
+  - app.js 파일에서 URL를 분기한다. `(routes > index.js 호출)`
+  - routes 폴더 > 각 폴더 생성 `(controllers > index.js 호출)`
+  - controllers 폴더 > 각 폴더 생성 `(models > index.js 호출)`
+  - models 폴더 > 각 폴더 생성 생성 `(db > index.js 호출)`
+9. 서버를 실행시키고 해당 URI에 요청에 따른 응답이 정상 작동 되는지 확인한다.
+
+## 막히는 부분
+### 서버 응답 오류 처리
+- 400, 500 응답 코드를 언제 어떻게 돌려줘야하는지 감이 잡히지 않음 -> 커뮤니티에 질문 올려놓은 상태
+- 해결 : 커뮤니티에 답변 받음 -> 500 응답 코드는 서버 오류 시 자동으로 보내지고 400 번대 돌려 주기 위해 구현 방법 힌트 얻음.
