@@ -1,11 +1,4 @@
-const users = require('./users');
-const orders = require('./orders');
-const items = require('./items');
-
-const models = {
-  users,
-  orders,
-  items
+module.exports = {
+  users: require('./users'),
+  items: require('./items')
 };
-
-module.exports = models;
