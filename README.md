@@ -30,8 +30,10 @@
 
 ### 여기에서 구현하지 않는 것
 - ORM Sequelize
+- 인증/보안
 - HTTPS
-- 인증/보안/쿠키/해시/세션
+- 쿠키/해시/세션
+- 토큰기반 인증 (Token-based Authentication)
 
 ## ❗️ 구현 방법
 
@@ -52,7 +54,7 @@
   `mkdir server`
 2. server 폴더를 Node.js 패키지를 생성한다. (package.json 파일이 생성되면 성공)  
   `npm init -y`
-3. server 에 필요한 Node.js 모듈을 다운 받는다. (package.json 파일안에 dependencies 필드에 다운받은 모둘 확인)
+3. server 에 필요한 Node.js 모듈을 다운 받는다. (package.json 파일안에 dependencies 필드에 다운받은 모듈 확인)
   - express : Node.js 서버 프레임워크  
     `npm install express`
   - cors : express 의 미들웨어로 사용  
@@ -89,15 +91,15 @@
     `mysql.createConnection()`로 생성한 변수를 이용해서 데이터베이스에 쿼리를 날릴 수 있다.
 9. 라우팅 : 메소드와 URL에 따라 분기(Routing)한다. (빈 모듈 생성 및 내보내기 한 후 분기에 맞게 연결해준다.)
   - app.js 파일에서 URL를 분기한다. `(routes > index.js 호출)`
-  - routes 폴더 > 각 폴더 생성 `(controllers > index.js 호출)`
-  - controllers 폴더 > 각 폴더 생성 `(models > index.js 호출)`
-  - models 폴더 > 각 폴더 생성 생성 `(db > index.js 호출)`
-10. 서버를 실행시키고 해당 URI에 요청에 따른 응답이 정상 작동 되는지 확인한다.
+  - routes 폴더 > 각 파일 생성 `(controllers > index.js 호출)`
+  - controllers 폴더 > 각 파일 생성 `(models > index.js 호출)`
+  - models 폴더 > 각 파일 생성 생성 `(db > index.js 호출)`
+10. 서버를 실행시키고 해당 URL 요청에 따른 응답이 정상 작동 되는지 확인한다.
 
 ### Step 4. Hmarket 프로젝트 클라이언트 구현하기
 1. client 폴더 생성과 함께 리액트 앱을 생성 및 실행한다. (NPX 주의!)  
     `npx create-react-app client`
-2. React 앱 개발에 필요한 Node.js 모듈을 다운 받는다. (package.json 파일안에 dependencies 필드에 다운받은 모둘 확인)
+2. React 앱 개발에 필요한 Node.js 모듈을 다운 받는다. (package.json 파일안에 dependencies 필드에 다운받은 모듈 확인)
   - redux : 클라이언트 애플리케이션 상태를 관리하기 위한 오픈 소스 JavaScript 라이브러리 (리덕스의 작동방식(컨셉)을 이해 필요)  
     `npm install redux`
   - react-redux : 리덕스를 리액트 앱에서 사용하기 위해서는 필요하다.  

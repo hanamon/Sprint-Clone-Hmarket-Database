@@ -24,7 +24,6 @@ module.exports = {
     FROM users
     WHERE id = ?
     `;
-
     const queryString = `
     SELECT *
     FROM orders
